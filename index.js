@@ -12,6 +12,6 @@ app.use(express.json());
 
 app.use('/api/blogs', blogRouter)
 
-app.listen(PORT, (req, res) => {
+app.listen(PORT, () => {
     console.log(`Website is hosted on port ${PORT}`);
 })

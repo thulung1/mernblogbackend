@@ -22,13 +22,10 @@ const fetchListOfBlogs = async (req, res) => {
 
 const addNewBlog = async (req, res) => {
   const { title, description } = req.body;
-  const currentDate = new Date();
-
   try {
     const newlyCreatedBlog = await Blog.create({
       title,
       description,
-      date: currentDate
     });
     return res.status(200).json({
       newlyCreatedBlog,
@@ -92,9 +89,25 @@ const updateABlog = async (req, res) => {
   }
 };
 
+const fetchBlog = async(req, res) => {
+  const id = req.params.id;
+
+  try {
+    const response = await Blog.findById(id)
+
+    return res.status(200).json({
+      id,
+      response
+    })
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 module.exports = {
   fetchListOfBlogs,
   addNewBlog,
   deleteABlog,
   updateABlog,
+  fetchBlog
 };
